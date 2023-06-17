@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import { toast } from "react-hot-toast";
 
 const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -10,15 +11,10 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     setIsAuthenticated(false);
-    logOut()
-      .then(() => {})
-      .catch((error) => console.log(error));
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "You have successfully log out!",
-      footer: '<a href="">Why do I have this issue?</a>',
-    });
+    logOut()        
+    .then(() => {        
+        toast.success('Successfully Logout!')
+      })         
   };
 
   const NavMenu = (
@@ -47,7 +43,7 @@ const Navbar = () => {
           <span className="flex justify-center items-center">
             <button
               onClick={handleLogOut}
-              className="btn btn-outline btn-warning border-0 border-b-4 bg-gradient-to-r from-neutral-500 via-cyan-600 to-neutral-600 rounded shadow-xl bg-opacity-30 hover:scale-110"
+              className="btn btn-outline btn-warning border-0 border-b-4 bg-gradient-to-r from-neutral-600 via-cyan-600 to-neutral-600 rounded shadow-xl bg-opacity-30 hover:scale-110"
             >
               Log out
             </button>{" "}
@@ -63,8 +59,8 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar fixed z-10 bg-gradient-to-r from-neutral-500 via-cyan-600 to-neutral-600 rounded shadow-xl bg-opacity-30  flex justify-between h-16 mx-auto container">
-      <div className="">
+    <div className="navbar fixed z-10 bg-gradient-to-r from-neutral-600 via-cyan-600 to-neutral-600 rounded shadow-xl bg-opacity-30  flex justify-between h-16 mx-auto container">
+      <div>
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg

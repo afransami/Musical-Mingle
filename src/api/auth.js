@@ -1,9 +1,11 @@
 export const saveUser = user => {
     const currentUser = {
-      email: user.email,
+      name: user.displayName,
+      email: user.email,      
+      photoURL: user.photoURL
     }
   
-    fetch(`https://music-shcool-server.vercel.app/users/${user?.email}`, {
+    fetch(`http://localhost:5000/users/${user?.email}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
