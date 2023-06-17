@@ -26,14 +26,13 @@ const Registration = () => {
   } = useForm();
   const [error, setError] = useState(" ");
 
-  const { createUser, updateUserProfile, user, loading, setLoading } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
 
-  const onSubmit = async (data) => {
-
+  const onSubmit = async (data) => {    
     const formData = new FormData ()
     formData.append("image", data.image[0])
 
@@ -60,6 +59,7 @@ const Registration = () => {
             name: data.name,
             email: data.email,
             photoURL: imageUrl,
+            
           };
           fetch("http://localhost:5000/users", {
             method: "POST",

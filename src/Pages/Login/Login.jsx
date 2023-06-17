@@ -6,8 +6,18 @@ import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import { useForm } from "react-hook-form";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import { toast } from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
   const {
     register,
     handleSubmit,
@@ -66,18 +76,30 @@ const Login = () => {
                   <span className="text-yellow-500">This field is required</span>
                 )}
               </div>
-              <div className="form-control">
-                <label className="label">
+              <div className="form-control relative ">
+                <label className="label ">
                   <span>Password</span>
                 </label>
                 <input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   placeholder="password"
                   {...register("password", {
                     required: true,
                   })}
-                  className="input input-bordered text-black"
+                  className="input  input-bordered text-black"
                 />
+                <button
+                    type="button"
+                    onClick={toggleConfirmPasswordVisibility}
+                    className="absolute top-14 right-4 text-gray-400"
+                  >
+                    {showConfirmPassword ? (
+                      <FaEye className="w-5 h-5"></FaEye>
+                    ) : (
+                      <FaEyeSlash className="w-5 h-5"></FaEyeSlash>
+                    )}
+                  </button>
+
                 {errors.password?.type === "required" && (
                   <p className="text-yellow-500" role="alert">
                     password is required

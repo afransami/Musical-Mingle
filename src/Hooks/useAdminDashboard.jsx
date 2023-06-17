@@ -6,7 +6,7 @@ export const useAdminDashboard = (email) => {
 
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/admin?email=${email}`)
+      fetch(`https://localhost:5000/admin?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.role === "admin") {
